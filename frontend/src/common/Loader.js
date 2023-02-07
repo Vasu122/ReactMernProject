@@ -2,15 +2,14 @@ import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Loader() {
-  const [open, setOpen] = React.useState(false);
+export default function Loader(props) {
+  const [open, setOpen] = React.useState(true);
  
 
   return (
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-        onClick={handleClose}
+        open={props.loader}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

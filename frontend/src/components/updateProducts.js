@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import Loader from "../common/Loader";
 const SignUp = () => {
-  //   const [getUserData, setUserData] = useState([]);
-
-  //   const [userName, setUserName] = useState();
-  //   const [userEmail, setUserEmail] = useState();
-  //   const [userPassword, setUserPassword] = useState();
-
+  const [loader,setLoader] = useState(false);
   const [inpval, setINP] = useState({
     userName: "",
     userEmail: "",
@@ -29,6 +24,7 @@ const SignUp = () => {
   const { id } = useParams("");
 
   const getData = async () => {
+    setLoader(true);
     const res = await fetch(`/getuser/${id}`, {
       method: "GET",
       headers: {
@@ -43,6 +39,7 @@ const SignUp = () => {
     } else {
       setINP(data);
       console.log("get Data");
+      setLoader(false);
     }
   };
 
@@ -81,6 +78,8 @@ const SignUp = () => {
 
   };
   return (
+    <>
+    <Loader loader={loader} />
     <div className="register">
       <h1>register</h1>
       <input
@@ -114,6 +113,7 @@ const SignUp = () => {
         SignUp
       </button>
     </div>
+    </>
   );
 };
 
